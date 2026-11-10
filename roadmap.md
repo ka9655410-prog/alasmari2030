@@ -1,2 +1,2 @@
-- [ ] Footer background photo
-- [ ] Why Us orbit redesign
+- [x] Footer background photo
+- [x] Why Us orbit redesign
