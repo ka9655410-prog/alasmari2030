@@ -496,9 +496,8 @@ function TimelineSection({ id, kicker, title, items, label, children }: { id: st
             {items.map(({ icon: Icon, title: it, desc, href, ltr }, i) => {
               const card = (
                 <div className="glass relative w-full overflow-hidden rounded-2xl px-5 py-5 transition duration-300 group-hover:-translate-y-1.5">
-                  <span className="pointer-events-none absolute end-3 top-2 text-5xl font-bold leading-none text-on-dark/10 md:text-6xl">0{i + 1}</span>
-                  <div className="relative text-sm font-bold text-sky">{label ? `${label} 0${i + 1}` : `0${i + 1}`}</div>
-                  <div className="relative mt-1 text-lg font-bold" dir={ltr ? "ltr" : undefined}>{it}</div>
+                  <div className="relative inline-flex items-center rounded-full bg-sky/15 px-3 py-0.5 text-sm font-bold text-sky ring-1 ring-sky/30">{label ? `${label} 0${i + 1}` : `0${i + 1}`}</div>
+                  <div className="relative mt-2 text-lg font-bold" dir={ltr ? "ltr" : undefined}>{it}</div>
                   {desc && <p className="relative mt-2 text-sm opacity-80">{desc}</p>}
                 </div>
               );
