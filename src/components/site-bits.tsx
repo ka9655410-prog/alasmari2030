@@ -15,7 +15,7 @@ export function Reveal({ children, className = "", delay = 0 }: { children: Reac
     if (!el) return;
     const io = new IntersectionObserver(
       ([e]) => {
-        if (e.isIntersecting) {
+        if (e?.isIntersecting) {
           el.classList.add("is-visible");
           io.disconnect();
         }
@@ -38,7 +38,7 @@ export function LazyMap({ title }: { title: string }) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => e.isIntersecting && (setShow(true), io.disconnect()), { rootMargin: "300px" });
+    const io = new IntersectionObserver(([e]) => e?.isIntersecting && (setShow(true), io.disconnect()), { rootMargin: "300px" });
     io.observe(el);
     return () => io.disconnect();
   }, []);
