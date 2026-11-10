@@ -534,3 +534,65 @@ function SocialIcon({ label, path }: { label: string; path: string }) {
     </a>
   );
 }
+
+type TimelineItem = { icon: React.ComponentType<{ className?: string }>; title: string; desc?: string; href?: string; ltr?: boolean };
+
+function curvePath(n: number) {
+  const pts = Array.from({ length: n }, (_, i) => [((i + 0.5) / n) * 1000, i % 2 ? 80 : 20] as const);
+  let d = `M${pts[0]![0]} ${pts[0]![1]}`;
+  for (let i = 1; i < n; i++) {
+    const [ax, ay] = pts[i - 1]!;
+    const [bx, by] = pts[i]!;
+    const k = (bx - ax) / 2;
+    d += ` C${ax + k} ${ay} ${bx - k} ${by} ${bx} ${by}`;
+  }
+  return d;
+}
+
+function TimelineSection({ id, kicker, title, items, label, children }: { id: string; kicker: string; title: string; items: TimelineItem[]; label?: string; children?: React.ReactNode }) {
+  const cols = items.length === 5 ? "lg:grid-cols-5" : "lg:grid-cols-4";
+  return (
+    <section id={id} className="relative isolate overflow-hidden bg-dark-brand py-20 text-on-dark md:py-28">
+      <div className="absolute -top-24 start-[-6rem] -z-10 h-80 w-80 rounded-full bg-sky/25 blur-3xl" aria-hidden="true" />
+      <div className="absolute -bottom-24 end-[-6rem] -z-10 h-96 w-96 rounded-full bg-primary/40 blur-3xl" aria-hidden="true" />
+      <div className="mx-auto max-w-7xl px-4 md:px-6">
+        <div className="mx-auto mb-14 max-w-2xl text-center">
+          <span className="glass inline-block rounded-full px-4 py-1.5 text-sm font-semibold">{kicker}</span>
+          <h2 className="mt-4 text-3xl font-bold md:text-4xl">{title}</h2>
+        </div>
+        <div className="relative">
+          <svg className="absolute inset-x-0 top-0 hidden h-[6.5rem] w-full lg:block" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true">
+            <path className="process-path" d={curvePath(items.length)} fill="none" stroke="var(--sky)" strokeWidth="3" strokeDasharray="10 10" />
+          </svg>
+          <div className="absolute bottom-6 start-9 top-6 w-0.5 bg-gradient-to-b from-sky to-primary lg:hidden" aria-hidden="true" />
+          <ol className={`relative grid gap-8 lg:gap-5 ${cols}`}>
+            {items.map(({ icon: Icon, title: it, desc, href, ltr }, i) => {
+              const card = (
+                <div className="glass relative w-full overflow-hidden rounded-2xl px-5 py-5 transition duration-300 group-hover:-translate-y-1.5">
+                  <span className="pointer-events-none absolute end-3 top-2 text-5xl font-bold leading-none text-on-dark/10 md:text-6xl">0{i + 1}</span>
+                  <div className="relative text-sm font-bold text-sky">{label ? `${label} 0${i + 1}` : `0${i + 1}`}</div>
+                  <div className="relative mt-1 text-lg font-bold" dir={ltr ? "ltr" : undefined}>{it}</div>
+                  {desc && <p className="relative mt-2 text-sm opacity-80">{desc}</p>}
+                </div>
+              );
+              return (
+                <Reveal key={it + i} delay={i * 150}>
+                  <li className={`group relative flex items-center gap-5 lg:flex-col lg:text-center ${i % 2 ? "lg:mt-16" : ""}`}>
+                    <span className="relative grid h-18 w-18 shrink-0 place-items-center">
+                      <span className="absolute inset-0 rounded-full bg-sky/40 animate-pulse-ring" style={{ animationDelay: `${i * 0.4}s` }} />
+                      <span className="icon-tile relative grid h-18 w-18 place-items-center rounded-full bg-brand text-primary-foreground shadow-glow ring-4 ring-navy">
+                        <Icon className="h-8 w-8" />
+                      </span>
+                    </span>
+                    {href ? <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noopener" className="block w-full">{card}</a> : card}
+                  </li>
+                </Reveal>
+              );
+            })}
+          </ol>
+        </div>
+        {children}
+      </div>
+    </section>
+  );
+}
