@@ -235,7 +235,7 @@ function Index() {
             </Reveal>
             <Reveal delay={150} className="grid gap-4">
               {t.about.points.map((p, i) => {
-                const Icon = [Award, ShieldCheck, BadgeCheck][i];
+                const Icon = [Award, ShieldCheck, BadgeCheck][i]!;
                 return (
                   <div key={p} className="flex items-center gap-4 rounded-2xl bg-ice p-5 shadow-card">
                     <span className="icon-tile grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand text-primary-foreground"><Icon className="h-6 w-6" /></span>
@@ -253,7 +253,7 @@ function Index() {
             <SectionHead kicker={t.services.kicker} title={t.services.title} />
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {t.services.items.map(([title, desc], i) => {
-                const Icon = SERVICE_ICONS[i];
+                const Icon = SERVICE_ICONS[i]!;
                 return (
                   <Reveal key={title} delay={(i % 3) * 100}>
                     <article className="group flex h-full flex-col rounded-3xl border border-border bg-card p-6 shadow-card transition duration-300 hover:-translate-y-1.5 hover:shadow-glow">
@@ -279,7 +279,7 @@ function Index() {
             <SectionHead kicker={t.why.kicker} title={t.why.title} />
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
               {t.why.items.map(([title, desc], i) => {
-                const Icon = WHY_ICONS[i];
+                const Icon = WHY_ICONS[i]!;
                 return (
                   <Reveal key={title} delay={i * 80}>
                     <div className="group h-full rounded-3xl bg-ice p-6 text-center transition hover:-translate-y-1 hover:shadow-card">
@@ -338,7 +338,7 @@ function Index() {
             <ol className="relative grid gap-6 md:grid-cols-4">
               <div className="absolute inset-x-[12%] top-9 hidden h-0.5 bg-brand md:block" aria-hidden="true" />
               {t.process.steps.map((s, i) => {
-                const Icon = STEP_ICONS[i];
+                const Icon = STEP_ICONS[i]!;
                 return (
                   <Reveal key={s} delay={i * 120}>
                     <li className="group relative flex items-center gap-4 md:flex-col md:text-center">
