@@ -9,6 +9,7 @@ import { content, waLink, PHONE, CR, UNIFIED, type Lang } from "@/content/site";
 import { WhatsAppIcon, Reveal, LazyMap, Wave, DropMotif } from "@/components/site-bits";
 import heroImg from "@/assets/riyadh-hero.jpg";
 import heroSm from "@/assets/riyadh-hero-sm.jpg";
+import footerBg from "@/assets/riyadh-vision-footer.jpg.asset.json";
 import vision from "@/assets/vision-2030-clear.png.asset.json";
 
 const ar = content.ar;
@@ -433,22 +434,22 @@ function Index() {
       </main>
 
       {/* FOOTER */}
-      <footer className="relative bg-navy text-on-dark">
-        <Wave flip className="absolute inset-x-0 -top-px text-ice" />
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-10 pt-28 md:grid-cols-2 md:px-6 lg:grid-cols-4">
-          <div>
+      <footer className="relative isolate overflow-hidden bg-navy bg-cover bg-center text-on-dark [text-shadow:0_1px_8px_rgb(0_0_0/0.45)]" style={{ backgroundImage: `url(${footerBg.url})` }}>
+        <div className="absolute inset-0 -z-10 bg-footer-overlay" aria-hidden="true" />
+        <div className="mx-auto grid max-w-7xl gap-5 px-4 pb-10 pt-20 md:grid-cols-2 md:px-6 lg:grid-cols-4">
+          <div className="footer-panel">
             <div className="text-xl font-bold">{t.name}</div>
-            <div className="mt-5"><VisionLogo className="h-20 w-auto" /></div>
+            <p className="mt-3 text-sm opacity-85">{t.contact.addressText}</p>
           </div>
-          <div>
+          <div className="footer-panel">
             <h3 className="mb-4 font-bold text-sky">{t.footer.links}</h3>
             <ul className="space-y-2 opacity-85">{t.nav.map(([id, l]) => <li key={id}><a href={`#${id}`} className="hover:text-sky">{l}</a></li>)}</ul>
           </div>
-          <div>
+          <div className="footer-panel">
             <h3 className="mb-4 font-bold text-sky">{t.footer.services}</h3>
             <ul className="space-y-2 text-sm opacity-85">{t.services.items.map(([s]) => <li key={s}>{s}</li>)}</ul>
           </div>
-          <div>
+          <div className="footer-panel">
             <h3 className="mb-4 font-bold text-sky">{t.footer.contact}</h3>
             <ul className="space-y-3 text-sm opacity-85">
               <li><a href={`tel:${PHONE}`} className="hover:text-sky" dir="ltr">{PHONE}</a></li>
@@ -464,7 +465,7 @@ function Index() {
             </div>
           </div>
         </div>
-        <div className="border-t border-on-dark/10 py-5 text-center text-sm opacity-70">© 2026 {t.name} — {t.footer.rights}</div>
+        <div className="bg-navy/85 py-5 text-center text-sm opacity-90 backdrop-blur">© 2026 {t.name} — {t.footer.rights}</div>
       </footer>
 
       {/* FLOATING WHATSAPP */}
