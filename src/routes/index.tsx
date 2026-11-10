@@ -227,7 +227,7 @@ function Index() {
               <p className="mt-6 text-lg leading-loose text-muted-foreground">{t.about.body}</p>
               <div className="sweep relative mt-8 overflow-hidden rounded-3xl bg-dark-brand p-2 text-on-dark shadow-glow">
                 <div className="absolute -top-16 end-[-3rem] h-40 w-40 rounded-full bg-sky/30 blur-3xl" aria-hidden="true" />
-                <ul className="relative grid divide-y divide-on-dark/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0 rtl:sm:divide-x-reverse">
+                <ul className="relative grid divide-y divide-on-dark/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
                   {t.about.points.map((p, i) => {
                     const Icon = [Award, ShieldCheck, BadgeCheck][i]!;
                     return (
