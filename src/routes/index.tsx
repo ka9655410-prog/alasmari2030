@@ -520,3 +520,17 @@ function Index() {
     </div>
   );
 }
+
+function SocialIcon({ label, path }: { label: string; path: string }) {
+  return (
+    <a
+      href="#"
+      onClick={(e) => e.preventDefault()}
+      aria-label={label}
+      title={label}
+      className="grid h-10 w-10 place-items-center rounded-full border border-on-dark/20 bg-on-dark/5 transition hover:-translate-y-0.5 hover:border-sky hover:text-sky"
+    >
+      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true"><path d={path} /></svg>
+    </a>
+  );
+}
