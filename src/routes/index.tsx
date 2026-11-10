@@ -353,17 +353,53 @@ function Index() {
         </section>
 
         {/* CONTACT */}
-        <TimelineSection id="contact" kicker={t.contact.kicker} title={t.contact.title}
-          items={[
-            { icon: Phone, title: PHONE, desc: t.contact.phone, href: `tel:${PHONE}`, ltr: true },
-            { icon: MessageCircle, title: PHONE, desc: t.contact.wa, href: waLink(), ltr: true },
-            { icon: MapPin, title: lang === "ar" ? "الرياض – حي بدر" : "Riyadh – Badr", desc: t.contact.address },
-            { icon: Hash, title: UNIFIED, desc: t.contact.unified, ltr: true },
-            { icon: FileText, title: CR, desc: t.contact.cr, ltr: true },
-          ]}>
-          <p className="mt-10 text-center text-sm opacity-80">{t.contact.addressText}</p>
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
-              <form onSubmit={onSubmit} className="grid gap-4 glass rounded-3xl p-6 md:p-8">
+        <section id="contact" className="relative isolate overflow-hidden bg-dark-brand py-20 text-on-dark md:py-28">
+          <div className="absolute -top-24 start-[-6rem] -z-10 h-80 w-80 rounded-full bg-sky/25 blur-3xl" aria-hidden="true" />
+          <div className="absolute -bottom-24 end-[-6rem] -z-10 h-96 w-96 rounded-full bg-primary/40 blur-3xl" aria-hidden="true" />
+          <div className="mx-auto max-w-7xl px-4 md:px-6">
+            <div className="mx-auto mb-12 max-w-2xl text-center">
+              <span className="glass inline-block rounded-full px-4 py-1.5 text-sm font-semibold">{t.contact.kicker}</span>
+              <h2 className="mt-4 text-3xl font-bold md:text-5xl">{t.contact.title}</h2>
+            </div>
+            <div className="grid gap-6 lg:grid-cols-5">
+              <Reveal className="lg:col-span-2">
+                <div className="glass flex h-full flex-col gap-4 rounded-3xl p-6 md:p-8">
+                  <a href={waLink()} target="_blank" rel="noopener" className="group relative flex items-center gap-4 overflow-hidden rounded-2xl bg-whatsapp p-5 text-on-dark shadow-glow transition hover:-translate-y-1 hover:brightness-110">
+                    <span className="relative grid h-14 w-14 shrink-0 place-items-center">
+                      <span className="absolute inset-0 rounded-full bg-on-dark/30 animate-pulse-ring" />
+                      <span className="relative grid h-14 w-14 place-items-center rounded-full bg-on-dark/20"><WhatsAppIcon className="h-8 w-8" /></span>
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-sm opacity-90">{t.contact.wa}</span>
+                      <span className="block text-2xl font-bold" dir="ltr">{PHONE}</span>
+                    </span>
+                  </a>
+                  <a href={`tel:${PHONE}`} className="flex items-center gap-4 rounded-2xl bg-brand p-5 shadow-glow transition hover:-translate-y-1">
+                    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-on-dark/15"><Phone className="h-7 w-7" /></span>
+                    <span>
+                      <span className="block text-sm opacity-90">{t.contact.phone}</span>
+                      <span className="block text-2xl font-bold" dir="ltr">{PHONE}</span>
+                    </span>
+                  </a>
+                  <ul className="mt-2 grid gap-3 border-t border-on-dark/10 pt-5">
+                    {[
+                      { icon: MapPin, label: t.contact.address, value: t.contact.addressText },
+                      { icon: Hash, label: t.contact.unified, value: UNIFIED, ltr: true },
+                      { icon: FileText, label: t.contact.cr, value: CR, ltr: true },
+                    ].map(({ icon: Icon, label, value, ltr }) => (
+                      <li key={label} className="flex items-start gap-3">
+                        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-sky/15 text-sky ring-1 ring-sky/30"><Icon className="h-5 w-5" /></span>
+                        <span className="min-w-0">
+                          <span className="block text-sm opacity-70">{label}</span>
+                          <span className="block font-bold" dir={ltr ? "ltr" : undefined}>{value}</span>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+              <Reveal delay={150} className="lg:col-span-3">
+                <form onSubmit={onSubmit} className="grid gap-4 glass h-full rounded-3xl p-6 md:p-8">
                 <input name="name" required placeholder={t.contact.form.name} className={inputCls} aria-label={t.contact.form.name} />
                 <input name="phone" required type="tel" inputMode="tel" placeholder={t.contact.form.phone} className={inputCls} aria-label={t.contact.form.phone} />
                 <select name="service" required defaultValue="" className={inputCls} aria-label={t.contact.form.service}>
@@ -375,9 +411,11 @@ function Index() {
                   <WhatsAppIcon className="h-6 w-6" /> {t.contact.form.submit}
                 </button>
               </form>
-              <div className="overflow-hidden rounded-3xl ring-1 ring-on-dark/15"><LazyMap title={t.contact.address} /></div>
+              </Reveal>
+            </div>
+            <div className="mt-6 overflow-hidden rounded-3xl ring-1 ring-on-dark/15"><LazyMap title={t.contact.address} /></div>
           </div>
-        </TimelineSection>
+        </section>
       </main>
 
       {/* FOOTER */}
