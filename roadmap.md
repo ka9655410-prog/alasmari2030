@@ -1,0 +1,2 @@
+- [ ] Footer background photo
+- [ ] Why Us orbit redesign
