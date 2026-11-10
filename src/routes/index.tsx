@@ -158,14 +158,6 @@ function Index() {
             >
               <Globe className="h-4 w-4" /> {lang === "ar" ? "EN" : "ع"}
             </button>
-            <a
-              href={waLink()}
-              target="_blank"
-              rel="noopener"
-              className="hidden h-10 items-center gap-2 rounded-xl bg-whatsapp px-4 text-sm font-semibold text-on-dark transition hover:brightness-110 sm:flex"
-            >
-              <WhatsAppIcon className="h-5 w-5" /> {PHONE}
-            </a>
             <button onClick={() => setOpen(!open)} className="grid h-10 w-10 place-items-center rounded-xl bg-on-dark/10 text-on-dark xl:hidden" aria-label={t.menu}>
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
