@@ -9,7 +9,7 @@ import { content, waLink, PHONE, CR, UNIFIED, type Lang } from "@/content/site";
 import { WhatsAppIcon, Reveal, LazyMap, Wave, DropMotif } from "@/components/site-bits";
 import heroImg from "@/assets/riyadh-hero.jpg";
 import heroSm from "@/assets/riyadh-hero-sm.jpg";
-import vision from "@/assets/vision-2030-logo.jpeg.asset.json";
+import vision from "@/assets/vision-2030.jpeg.asset.json";
 
 const ar = content.ar;
 const TITLE = "خدمات الصيانة والنظافة في الرياض | مؤسسة علي معيض الأسمري";
@@ -188,7 +188,7 @@ function Index() {
         <section id="home" className="relative isolate flex min-h-[100svh] items-center overflow-hidden pt-20">
           <picture>
             <source media="(max-width: 767px)" srcSet={heroSm} />
-            <img src={heroImg} alt="أفق مدينة الرياض عند الغروب" width={1600} height={912} fetchPriority="high" decoding="async" className="absolute inset-0 -z-20 h-full w-full object-cover" />
+            <img src={heroImg} alt="أفق مدينة الرياض عند الغروب" width={1920} height={1088} fetchPriority="high" decoding="async" className="absolute inset-0 -z-20 h-full w-full object-cover" />
           </picture>
           <div className="absolute inset-0 -z-10 bg-hero-overlay" />
           <DropMotif className="pointer-events-none absolute -end-20 top-24 -z-10 h-80 w-80 text-on-dark opacity-10" />
