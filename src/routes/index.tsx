@@ -233,12 +233,16 @@ function Index() {
               <h2 className="mt-4 text-3xl font-bold leading-snug text-navy md:text-5xl md:leading-tight">{t.about.title}</h2>
               <span className="mt-5 block h-1.5 w-24 rounded-full bg-brand" />
               <p className="mt-6 text-lg leading-loose text-muted-foreground">{t.about.body}</p>
-              <ul className="mt-8 flex flex-wrap gap-3">
-                {t.about.points.map((p) => (
-                  <li key={p} className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 font-bold text-navy shadow-card">
-                    <span className="grid h-6 w-6 place-items-center rounded-full bg-brand text-primary-foreground"><CheckCircle2 className="h-4 w-4" /></span>{p}
-                  </li>
-                ))}
+              <ul className="mt-8 grid gap-3 sm:grid-cols-3">
+                {t.about.points.map((p, i) => {
+                  const Icon = [Award, ShieldCheck, BadgeCheck][i]!;
+                  return (
+                    <li key={p} className="flex items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3.5 shadow-card transition duration-300 hover:-translate-y-1 hover:shadow-glow">
+                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand text-primary-foreground"><Icon className="h-5 w-5" strokeWidth={1.8} /></span>
+                      <span className="font-bold text-navy">{p}</span>
+                    </li>
+                  );
+                })}
               </ul>
             </Reveal>
             <Reveal delay={150}>
