@@ -287,8 +287,7 @@ function Index() {
         </section>
 
         {/* WHY */}
-        <TimelineSection id="why" kicker={t.why.kicker} title={t.why.title}
-          items={t.why.items.map(([title, desc], i) => ({ icon: WHY_ICONS[i]!, title, desc }))} />
+        <OrbitSection kicker={t.why.kicker} title={t.why.title} items={t.why.items.map(([title, desc], i) => ({ icon: WHY_ICONS[i]!, title, desc }))} />
 
         {/* CERTIFICATE */}
         <section id="certificate" className="relative overflow-hidden bg-dark-brand py-20 text-on-dark md:py-28">
@@ -563,6 +562,71 @@ function TimelineSection({ id, kicker, title, items, label, children }: { id: st
           </ol>
         </div>
         {children}
+      </div>
+    </section>
+  );
+}
+
+function OrbitSection({ kicker, title, items }: { kicker: string; title: string; items: { icon: React.ComponentType<{ className?: string }>; title: string; desc: string }[] }) {
+  const n = items.length;
+  const pos = items.map((_, i) => {
+    const a = (-90 + (360 / n) * i) * (Math.PI / 180);
+    return { x: 50 + 38 * Math.cos(a), y: 50 + 40 * Math.sin(a) };
+  });
+  const hub = (size: string) => (
+    <div className={`relative grid place-items-center ${size}`}>
+      <div className="absolute inset-[-14%] rounded-full border-2 border-dashed border-primary/30 animate-spin-slow" aria-hidden="true" />
+      <div className="absolute inset-[-28%] rounded-full border border-dashed border-sky/30 animate-spin-slow [animation-direction:reverse]" aria-hidden="true" />
+      <div className="relative grid h-full w-full place-items-center rounded-full bg-dark-brand p-6 text-center text-on-dark shadow-glow">
+        <div className="absolute inset-0 rounded-full bg-sky/20 animate-pulse-ring" aria-hidden="true" />
+        <div className="relative">
+          <span className="inline-block rounded-full bg-sky/20 px-3 py-1 text-xs font-semibold text-sky">{kicker}</span>
+          <h2 className="mt-2 text-2xl font-bold md:text-3xl">{title}</h2>
+        </div>
+      </div>
+    </div>
+  );
+  const card = (it: (typeof items)[number], i: number) => {
+    const Icon = it.icon;
+    return (
+      <div className="group relative h-full rounded-3xl border border-border bg-card p-5 shadow-card transition duration-300 hover:-translate-y-1.5 hover:shadow-glow">
+        <div className="flex items-center gap-3">
+          <span className="icon-tile grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-brand text-primary-foreground shadow-glow"><Icon className="h-6 w-6" /></span>
+          <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-bold text-primary">0{i + 1}</span>
+        </div>
+        <h3 className="mt-3 text-lg font-bold text-navy">{it.title}</h3>
+        <p className="mt-1 text-sm text-muted-foreground">{it.desc}</p>
+        <span className="absolute inset-x-6 bottom-0 h-1 scale-x-0 rounded-full bg-brand transition-transform duration-500 group-hover:scale-x-100" />
+      </div>
+    );
+  };
+  return (
+    <section id="why" className="relative isolate overflow-hidden bg-ice py-20 md:py-28">
+      <div className="absolute start-1/2 top-1/2 -z-10 h-[40rem] w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky/15 blur-3xl" aria-hidden="true" />
+      <div className="mx-auto max-w-6xl px-4 md:px-6">
+        {/* Desktop orbit */}
+        <div className="relative hidden h-[46rem] lg:block">
+          <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            {pos.map((p, i) => (
+              <line key={i} x1="50" y1="50" x2={p.x} y2={p.y} stroke="var(--primary)" strokeOpacity="0.35" strokeWidth="0.25" strokeDasharray="1 1" className="process-path" vectorEffect="non-scaling-stroke" />
+            ))}
+          </svg>
+          <div className="absolute start-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rtl:translate-x-1/2">{hub("h-60 w-60")}</div>
+          {items.map((it, i) => (
+            <div key={it.title} className="absolute w-64 -translate-x-1/2 -translate-y-1/2" style={{ left: `${pos[i]!.x}%`, top: `${pos[i]!.y}%` }}>
+              <Reveal delay={i * 120}>{card(it, i)}</Reveal>
+            </div>
+          ))}
+        </div>
+        {/* Mobile / tablet */}
+        <div className="lg:hidden">
+          <div className="mb-14 flex justify-center pt-6">{hub("h-48 w-48")}</div>
+          <div className="relative grid gap-4 sm:grid-cols-2">
+            {items.map((it, i) => (
+              <Reveal key={it.title} delay={i * 100} className={i === n - 1 && n % 2 ? "sm:col-span-2" : ""}>{card(it, i)}</Reveal>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

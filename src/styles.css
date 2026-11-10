@@ -210,3 +210,8 @@ section[id] { scroll-margin-top: 5rem; }
   border: 1px solid color-mix(in oklab, #F3F8FD 12%, transparent);
   backdrop-filter: blur(10px);
 }
+
+@utility animate-spin-slow {
+  animation: spin 40s linear infinite;
+  @media (prefers-reduced-motion: reduce) { animation: none; }
+}
