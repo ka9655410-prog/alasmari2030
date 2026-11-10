@@ -194,7 +194,7 @@ function Index() {
               <h1 className="mt-6 text-4xl font-bold leading-[1.2] sm:text-5xl lg:text-6xl">{t.hero.title}</h1>
               <p className="mt-5 max-w-2xl text-lg leading-relaxed opacity-90 md:text-xl">{t.hero.sub}</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a href={waLink()} target="_blank" rel="noopener" className="inline-flex h-14 items-center justify-center gap-2 rounded-2xl bg-brand px-7 text-lg font-semibold text-primary-foreground shadow-glow transition hover:-translate-y-0.5">
+                <a href={waLink()} target="_blank" rel="noopener noreferrer" className="inline-flex h-14 items-center justify-center gap-2 rounded-2xl bg-brand px-7 text-lg font-semibold text-primary-foreground shadow-glow transition hover:-translate-y-0.5">
                   <WhatsAppIcon className="h-6 w-6" /> {t.hero.cta}
                 </a>
                 <a href="#contact" className="glass inline-flex h-14 items-center justify-center rounded-2xl px-7 text-lg font-semibold transition hover:-translate-y-0.5">
@@ -275,7 +275,7 @@ function Index() {
                       </span>
                       <h3 className="mt-5 text-xl font-bold text-navy">{title}</h3>
                       <p className="mt-2 flex-1 text-muted-foreground">{desc}</p>
-                      <a href={waLink(t.services.msg + title)} target="_blank" rel="noopener" className="mt-5 inline-flex items-center gap-2 font-semibold text-primary">
+                      <a href={waLink(t.services.msg + title)} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 font-semibold text-primary">
                         <WhatsAppIcon className="h-5 w-5 text-whatsapp" /> {t.services.order}
                       </a>
                     </article>
@@ -373,7 +373,7 @@ function Index() {
             <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-5">
               <Reveal className="order-1 lg:col-span-2">
                 <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-1">
-                  <a href={waLink()} target="_blank" rel="noopener" className="group flex min-h-16 flex-col items-center justify-center gap-2 rounded-2xl bg-whatsapp p-4 text-center text-on-dark shadow-glow transition active:scale-95 hover:brightness-110 sm:p-5 lg:flex-row lg:justify-start lg:gap-4 lg:text-start">
+                  <a href={waLink()} target="_blank" rel="noopener noreferrer" className="group flex min-h-16 flex-col items-center justify-center gap-2 rounded-2xl bg-whatsapp p-4 text-center text-on-dark shadow-glow transition active:scale-95 hover:brightness-110 sm:p-5 lg:flex-row lg:justify-start lg:gap-4 lg:text-start">
                     <span className="relative grid h-14 w-14 shrink-0 place-items-center">
                       <span className="absolute inset-0 rounded-full bg-on-dark/30 animate-pulse-ring" />
                       <span className="relative grid h-14 w-14 place-items-center rounded-full bg-on-dark/20"><WhatsAppIcon className="h-8 w-8" /></span>
@@ -425,7 +425,7 @@ function Index() {
               </Reveal>
             </div>
             <div className="mt-6 overflow-hidden rounded-3xl ring-1 ring-on-dark/15 [&>div]:h-64 md:[&>div]:h-96 [&>div]:min-h-0"><LazyMap title={t.contact.address} /></div>
-            <a href="https://www.google.com/maps/search/?api=1&query=%D8%AD%D9%8A+%D8%A8%D8%AF%D8%B1+%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6" target="_blank" rel="noopener" className="glass mx-auto mt-4 flex h-14 w-full max-w-sm items-center justify-center gap-2 rounded-2xl font-bold transition active:scale-95 hover:text-sky">
+            <a href="https://www.google.com/maps/search/?api=1&query=%D8%AD%D9%8A+%D8%A8%D8%AF%D8%B1+%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6" target="_blank" rel="noopener noreferrer" className="glass mx-auto mt-4 flex h-14 w-full max-w-sm items-center justify-center gap-2 rounded-2xl font-bold transition active:scale-95 hover:text-sky">
               <MapPin className="h-5 w-5" /> {lang === "ar" ? "افتح في الخرائط" : "Open in Maps"}
             </a>
           </div>
@@ -483,7 +483,7 @@ function Index() {
       <a
         href={waLink()}
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         aria-label={t.waFloat}
         className="fixed bottom-5 end-5 z-50 flex items-center gap-2 rounded-full bg-whatsapp p-4 text-on-dark shadow-glow transition hover:scale-105 md:px-5"
       >
@@ -566,7 +566,7 @@ function TimelineSection({ id, kicker, title, items, label, children }: { id: st
                         <Icon className="h-8 w-8" />
                       </span>
                     </span>
-                    {href ? <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noopener" className="block w-full">{card}</a> : card}
+                    {href ? <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="block w-full">{card}</a> : card}
                   </li>
                 </Reveal>
               );

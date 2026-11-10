@@ -30,6 +30,22 @@ const csrfMiddleware = createCsrfMiddleware({
 // requireSupabaseAuth server functions need. Add it by hand only if Lovable Cloud or a
 // user-managed Supabase project is connected, no middleware here sets Authorization, and the
 // project did not intentionally replace it.
+const securityHeadersMiddleware = createMiddleware().server(async ({ next }) => {
+  const result = await next();
+  const res = (result as { response?: Response }).response;
+  if (res?.headers) {
+    try {
+      res.headers.set("X-Content-Type-Options", "nosniff");
+      res.headers.set("X-Frame-Options", "SAMEORIGIN");
+      res.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+      res.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+    } catch {
+      // immutable headers — skip
+    }
+  }
+  return result;
+});
+
 export const startInstance = createStart(() => ({
-  requestMiddleware: [errorMiddleware, csrfMiddleware],
+  requestMiddleware: [errorMiddleware, securityHeadersMiddleware, csrfMiddleware],
 }));
