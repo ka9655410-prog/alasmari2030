@@ -452,15 +452,15 @@ function Index() {
             <div className="text-xl font-bold">{t.name}</div>
             <div className="mt-5"><VisionLogo className="h-20 w-auto" /></div>
           </div>
-          <div className="footer-panel">
+          <div>
             <h3 className="mb-4 font-bold text-sky">{t.footer.links}</h3>
             <ul className="space-y-2 opacity-85">{t.nav.map(([id, l]) => <li key={id}><a href={`#${id}`} className="hover:text-sky">{l}</a></li>)}</ul>
           </div>
-          <div className="footer-panel">
+          <div>
             <h3 className="mb-4 font-bold text-sky">{t.footer.services}</h3>
             <ul className="space-y-2 text-sm opacity-85">{t.services.items.map(([s]) => <li key={s}>{s}</li>)}</ul>
           </div>
-          <div className="footer-panel">
+          <div>
             <h3 className="mb-4 font-bold text-sky">{t.footer.contact}</h3>
             <ul className="space-y-3 text-sm opacity-85">
               <li><a href={`tel:${PHONE}`} className="hover:text-sky" dir="ltr">{PHONE}</a></li>
@@ -476,7 +476,7 @@ function Index() {
             </div>
           </div>
         </div>
-        <div className="bg-navy/85 py-5 text-center text-sm opacity-90 backdrop-blur">© 2026 {t.name} — {t.footer.rights}</div>
+        <div className="border-t border-on-dark/10 py-5 text-center text-sm opacity-70">© 2026 {t.name} — {t.footer.rights}</div>
       </footer>
 
       {/* FLOATING WHATSAPP */}
