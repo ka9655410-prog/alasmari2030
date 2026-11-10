@@ -432,13 +432,25 @@ function Index() {
         </section>
       </main>
 
+      {/* VISION 2030 PHOTO BAND */}
+      <section className="relative isolate overflow-hidden bg-navy" aria-label={ar.vision2030Alt}>
+        <img
+          src={footerBg.url}
+          alt={ar.vision2030Alt}
+          loading="lazy"
+          decoding="async"
+          className="h-[42vh] max-h-[560px] min-h-[220px] w-full object-cover object-center md:h-[62vh]"
+        />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-navy to-transparent" aria-hidden="true" />
+      </section>
+
       {/* FOOTER */}
-      <footer className="relative isolate overflow-hidden bg-navy bg-cover bg-center text-on-dark [text-shadow:0_1px_8px_rgb(0_0_0/0.45)]" style={{ backgroundImage: `url(${footerBg.url})` }}>
-        <div className="absolute inset-0 -z-10 bg-footer-overlay" aria-hidden="true" />
-        <div className="mx-auto grid max-w-7xl gap-5 px-4 pb-10 pt-20 md:grid-cols-2 md:px-6 lg:grid-cols-4">
-          <div className="footer-panel">
+      <footer className="relative bg-navy text-on-dark">
+        <Wave flip className="absolute inset-x-0 -top-px text-ice" />
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-10 pt-28 md:grid-cols-2 md:px-6 lg:grid-cols-4">
+          <div>
             <div className="text-xl font-bold">{t.name}</div>
-            <p className="mt-3 text-sm opacity-85">{t.contact.addressText}</p>
+            <div className="mt-5"><VisionLogo className="h-20 w-auto" /></div>
           </div>
           <div className="footer-panel">
             <h3 className="mb-4 font-bold text-sky">{t.footer.links}</h3>
