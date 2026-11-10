@@ -9,7 +9,7 @@ import { content, waLink, PHONE, CR, UNIFIED, type Lang } from "@/content/site";
 import { WhatsAppIcon, Reveal, LazyMap, Wave, DropMotif } from "@/components/site-bits";
 import heroImg from "@/assets/riyadh-hero.jpg";
 import heroSm from "@/assets/riyadh-hero-sm.jpg";
-import vision from "@/assets/vision-2030.jpeg.asset.json";
+import vision from "@/assets/vision-2030-clear.png.asset.json";
 
 const ar = content.ar;
 const TITLE = "خدمات الصيانة والنظافة في الرياض | مؤسسة علي معيض الأسمري";
@@ -97,7 +97,7 @@ function SectionHead({ kicker, title, light = false }: { kicker: string; title: 
 }
 
 function VisionLogo({ className = "" }: { className?: string }) {
-  return <img src={vision.url} alt={ar.vision2030Alt} className={`rounded-xl object-cover ${className}`} loading="lazy" decoding="async" />;
+  return <img src={vision.url} alt={ar.vision2030Alt} className={`object-contain ${className}`} loading="lazy" decoding="async" />;
 }
 
 function Index() {
@@ -132,19 +132,19 @@ function Index() {
   return (
     <div className="min-h-screen overflow-x-clip bg-background font-sans text-foreground">
       {/* NAVBAR */}
-      <header className="fixed inset-x-0 top-0 z-50 glass-light">
+      <header className="fixed inset-x-0 top-0 z-50 glass-dark">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 md:h-20 md:px-6">
-          {lang === "en" && <VisionLogo className="h-10 w-[76px] shrink-0 shadow-card md:h-14 md:w-[106px]" />}
+          {lang === "en" && <VisionLogo className="h-11 w-auto shrink-0 md:h-14" />}
           <a href="#home" className="flex min-w-0 items-center gap-2">
             <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-dark-brand text-sky">
               <Droplets className="h-5 w-5" />
             </span>
-            <span className="truncate text-sm font-bold text-navy md:text-base">{t.short}</span>
+            <span className="truncate text-sm font-bold text-on-dark md:text-base">{t.short}</span>
           </a>
           <ul className="hidden items-center gap-1 xl:flex">
             {t.nav.map(([id, label]) => (
               <li key={id}>
-                <a href={`#${id}`} className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition hover:bg-secondary hover:text-primary">
+                <a href={`#${id}`} className="rounded-lg px-3 py-2 text-sm font-medium text-on-dark/80 transition hover:bg-on-dark/10 hover:text-sky">
                   {label}
                 </a>
               </li>
@@ -153,7 +153,7 @@ function Index() {
           <div className="flex shrink-0 items-center gap-2">
             <button
               onClick={() => setLang(lang === "ar" ? "en" : "ar")}
-              className="flex h-10 items-center gap-1 rounded-xl border border-border px-3 text-sm font-semibold text-navy transition hover:border-primary"
+              className="flex h-10 items-center gap-1 rounded-xl border border-on-dark/25 px-3 text-sm font-semibold text-on-dark transition hover:border-sky"
               aria-label="Language"
             >
               <Globe className="h-4 w-4" /> {lang === "ar" ? "EN" : "ع"}
@@ -166,17 +166,17 @@ function Index() {
             >
               <WhatsAppIcon className="h-5 w-5" /> {PHONE}
             </a>
-            <button onClick={() => setOpen(!open)} className="grid h-10 w-10 place-items-center rounded-xl bg-secondary text-navy xl:hidden" aria-label={t.menu}>
+            <button onClick={() => setOpen(!open)} className="grid h-10 w-10 place-items-center rounded-xl bg-on-dark/10 text-on-dark xl:hidden" aria-label={t.menu}>
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
-            {lang === "ar" && <VisionLogo className="h-10 w-[76px] shrink-0 shadow-card md:h-14 md:w-[106px]" />}
+            {lang === "ar" && <VisionLogo className="h-11 w-auto shrink-0 md:h-14" />}
           </div>
         </nav>
         {open && (
-          <ul className="grid gap-1 border-t border-border bg-background px-4 py-3 xl:hidden">
+          <ul className="grid gap-1 border-t border-on-dark/15 px-4 py-3 xl:hidden">
             {t.nav.map(([id, label]) => (
               <li key={id}>
-                <a href={`#${id}`} onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 font-medium text-navy hover:bg-secondary">
+                <a href={`#${id}`} onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 font-medium text-on-dark hover:bg-on-dark/10">
                   {label}
                 </a>
               </li>
@@ -193,7 +193,6 @@ function Index() {
             <img src={heroImg} alt="أفق مدينة الرياض عند الغروب" width={1920} height={1088} fetchPriority="high" decoding="async" className="absolute inset-0 -z-20 h-full w-full object-cover" />
           </picture>
           <div className="absolute inset-0 -z-10 bg-hero-overlay" />
-          <DropMotif className="pointer-events-none absolute -end-20 top-24 -z-10 h-80 w-80 text-on-dark opacity-10" />
           <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pb-28 md:px-6 lg:grid-cols-[1.4fr_1fr]">
             <div className="animate-fade-up text-on-dark">
               <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold">
@@ -211,8 +210,8 @@ function Index() {
               </div>
             </div>
             <div className="flex flex-col items-center gap-5 lg:items-end">
-              <div className="animate-floaty rounded-3xl shadow-glow">
-                <VisionLogo className="h-32 w-64 rounded-3xl md:h-40 md:w-80" />
+              <div className="animate-floaty">
+                <VisionLogo className="h-36 w-auto drop-shadow-2xl md:h-48" />
               </div>
               <div className="glass flex items-center gap-3 rounded-2xl px-5 py-4 text-on-dark">
                 <FileText className="h-6 w-6 text-sky" />
@@ -227,24 +226,41 @@ function Index() {
         </section>
 
         {/* ABOUT */}
-        <section id="about" className="relative py-20 md:py-28">
-          <DropMotif className="pointer-events-none absolute start-0 top-10 h-64 w-64 text-primary opacity-[0.06]" />
-          <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 md:grid-cols-2 md:px-6">
+        <section id="about" className="relative overflow-hidden py-20 md:py-28">
+          <div className="mx-auto grid max-w-6xl items-center gap-14 px-4 md:grid-cols-2 md:px-6">
             <Reveal>
-              <span className="inline-block rounded-full bg-brand px-4 py-1.5 text-sm font-semibold text-primary-foreground">{t.about.kicker}</span>
-              <h2 className="mt-4 text-3xl font-bold leading-tight text-navy md:text-4xl">{t.about.title}</h2>
-              <p className="mt-5 text-lg leading-loose text-muted-foreground">{t.about.body}</p>
+              <span className="inline-flex items-center gap-2 text-sm font-bold tracking-wide text-primary"><span className="h-0.5 w-8 bg-brand" />{t.about.kicker}</span>
+              <h2 className="mt-4 text-3xl font-bold leading-snug text-navy md:text-5xl md:leading-tight">{t.about.title}</h2>
+              <span className="mt-5 block h-1.5 w-24 rounded-full bg-brand" />
+              <p className="mt-6 text-lg leading-loose text-muted-foreground">{t.about.body}</p>
+              <ul className="mt-8 flex flex-wrap gap-3">
+                {t.about.points.map((p) => (
+                  <li key={p} className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 font-bold text-navy shadow-card">
+                    <span className="grid h-6 w-6 place-items-center rounded-full bg-brand text-primary-foreground"><CheckCircle2 className="h-4 w-4" /></span>{p}
+                  </li>
+                ))}
+              </ul>
             </Reveal>
-            <Reveal delay={150} className="grid gap-4">
-              {t.about.points.map((p, i) => {
-                const Icon = [Award, ShieldCheck, BadgeCheck][i]!;
-                return (
-                  <div key={p} className="flex items-center gap-4 rounded-2xl bg-ice p-5 shadow-card">
-                    <span className="icon-tile grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand text-primary-foreground"><Icon className="h-6 w-6" /></span>
-                    <span className="text-xl font-bold text-navy">{p}</span>
-                  </div>
-                );
-              })}
+            <Reveal delay={150}>
+              <div className="relative mx-auto max-w-md pb-10 pe-6">
+                <div className="absolute -inset-4 -z-10 rounded-[3rem] bg-brand opacity-20 blur-2xl" aria-hidden="true" />
+                <img src={heroSm} alt="" loading="lazy" decoding="async" width={720} height={1020} className="aspect-[4/5] w-full rounded-[2.5rem] rounded-tl-[6rem] object-cover shadow-card" />
+                <div className="absolute -start-4 top-10 grid gap-3">
+                  {t.about.points.map((p, i) => {
+                    const Icon = [Award, ShieldCheck, BadgeCheck][i]!;
+                    return (
+                      <div key={p} className="glass-light animate-floaty flex items-center gap-3 rounded-2xl border px-4 py-3 shadow-card" style={{ animationDelay: `${i * 0.8}s` }}>
+                        <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand text-primary-foreground"><Icon className="h-5 w-5" /></span>
+                        <span className="font-bold text-navy">{p}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="absolute bottom-0 end-0 flex items-center gap-3 rounded-2xl bg-dark-brand px-5 py-4 text-on-dark shadow-glow">
+                  <FileText className="h-6 w-6 text-sky" />
+                  <div><div className="text-xs opacity-80">{t.hero.cr}</div><div className="font-bold tracking-wider">{CR}</div></div>
+                </div>
+              </div>
             </Reveal>
           </div>
         </section>
@@ -276,18 +292,22 @@ function Index() {
         </section>
 
         {/* WHY */}
-        <section id="why" className="py-20 md:py-28">
+        <section id="why" className="relative bg-ice py-20 md:py-28">
           <div className="mx-auto max-w-7xl px-4 md:px-6">
             <SectionHead kicker={t.why.kicker} title={t.why.title} />
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+            <div className="grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {t.why.items.map(([title, desc], i) => {
                 const Icon = WHY_ICONS[i]!;
+                const big = i === 0;
                 return (
-                  <Reveal key={title} delay={i * 80}>
-                    <div className="group h-full rounded-3xl bg-ice p-6 text-center transition hover:-translate-y-1 hover:shadow-card">
-                      <span className="icon-tile mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-dark-brand text-sky"><Icon className="h-7 w-7" /></span>
-                      <h3 className="mt-4 text-lg font-bold text-navy">{title}</h3>
-                      <p className="mt-2 text-sm text-muted-foreground">{desc}</p>
+                  <Reveal key={title} delay={i * 100} className={big ? "sm:col-span-2 lg:row-span-2" : ""}>
+                    <div className={`group relative h-full overflow-hidden rounded-3xl p-7 transition duration-300 hover:-translate-y-1.5 ${big ? "bg-dark-brand text-on-dark shadow-glow md:p-10" : "border border-border bg-card shadow-card hover:shadow-glow"}`}>
+                      <span className={`pointer-events-none absolute -bottom-6 end-3 font-bold leading-none ${big ? "text-[10rem] text-on-dark/10" : "text-8xl text-primary/10"}`}>0{i + 1}</span>
+                      {big && <div className="absolute -top-20 end-[-5rem] h-64 w-64 rounded-full bg-sky/30 blur-3xl" aria-hidden="true" />}
+                      <span className={`icon-tile relative grid place-items-center rounded-2xl bg-brand text-primary-foreground shadow-glow ${big ? "h-20 w-20" : "h-14 w-14"}`}><Icon className={big ? "h-10 w-10" : "h-7 w-7"} /></span>
+                      <h3 className={`relative mt-6 font-bold ${big ? "text-3xl md:text-4xl" : "text-xl text-navy"}`}>{title}</h3>
+                      <p className={`relative mt-3 ${big ? "text-lg opacity-85" : "text-muted-foreground"}`}>{desc}</p>
+                      <span className="absolute inset-x-0 bottom-0 h-1 origin-[inherit] scale-x-0 bg-brand transition-transform duration-500 group-hover:scale-x-100" />
                     </div>
                   </Reveal>
                 );
@@ -374,16 +394,16 @@ function Index() {
         </section>
 
         {/* VISION */}
-        <section id="vision" className="bg-ice py-20 md:py-28">
+        <section id="vision" className="relative overflow-hidden bg-dark-brand py-20 text-on-dark md:py-28">
           <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 md:grid-cols-2 md:px-6">
             <Reveal className="order-2 md:order-1">
               <span className="inline-block rounded-full bg-brand px-4 py-1.5 text-sm font-semibold text-primary-foreground">{t.vision.kicker}</span>
-              <h2 className="mt-4 text-3xl font-bold text-navy md:text-4xl">{t.vision.title}</h2>
-              <p className="mt-5 text-lg leading-loose text-muted-foreground">{t.vision.body}</p>
+              <h2 className="mt-4 text-3xl font-bold md:text-4xl">{t.vision.title}</h2>
+              <p className="mt-5 text-lg leading-loose opacity-85">{t.vision.body}</p>
             </Reveal>
             <Reveal delay={150} className="order-1 md:order-2">
-              <div className="overflow-hidden rounded-[2rem] shadow-card">
-                <VisionLogo className="aspect-[2/1] h-auto w-full rounded-none" />
+              <div className="grid place-items-center p-6">
+                <VisionLogo className="h-auto w-full max-w-md animate-floaty" />
               </div>
             </Reveal>
           </div>
@@ -454,7 +474,7 @@ function Index() {
         <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-10 pt-28 md:grid-cols-2 md:px-6 lg:grid-cols-4">
           <div>
             <div className="text-xl font-bold">{t.name}</div>
-            <div className="mt-5 inline-block"><VisionLogo className="h-20 w-40" /></div>
+            <div className="mt-5"><VisionLogo className="h-20 w-auto" /></div>
           </div>
           <div>
             <h3 className="mb-4 font-bold text-sky">{t.footer.links}</h3>
