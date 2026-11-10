@@ -156,6 +156,11 @@ section[id] { scroll-margin-top: 5rem; }
   border: 1px solid color-mix(in oklab, var(--on-dark) 25%, transparent);
   backdrop-filter: blur(14px);
 }
+@utility glass-dark {
+  background: color-mix(in oklab, var(--navy) 82%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--on-dark) 12%, transparent);
+  backdrop-filter: blur(14px) saturate(140%);
+}
 @utility glass-light {
   background: color-mix(in oklab, var(--background) 82%, transparent);
   border-bottom: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
