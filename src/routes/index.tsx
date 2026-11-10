@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState, type FormEvent } from "react";
+import React, { useEffect, useState, type FormEvent } from "react";
 import {
   Wind, ChefHat, Snowflake, Droplets, Wrench, Bug, Sparkles, Sofa, Building2,
   Users, ShieldCheck, Cpu, Zap, Award, Phone, MapPin, FileText, Hash, Menu, X,
@@ -285,29 +285,8 @@ function Index() {
         </section>
 
         {/* WHY */}
-        <section id="why" className="relative bg-ice py-20 md:py-28">
-          <div className="mx-auto max-w-7xl px-4 md:px-6">
-            <SectionHead kicker={t.why.kicker} title={t.why.title} />
-            <div className="grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {t.why.items.map(([title, desc], i) => {
-                const Icon = WHY_ICONS[i]!;
-                const big = i === 0;
-                return (
-                  <Reveal key={title} delay={i * 100} className={big ? "sm:col-span-2 lg:row-span-2" : ""}>
-                    <div className={`group relative h-full overflow-hidden rounded-3xl p-7 transition duration-300 hover:-translate-y-1.5 ${big ? "bg-dark-brand text-on-dark shadow-glow md:p-10" : "border border-border bg-card shadow-card hover:shadow-glow"}`}>
-                      <span className={`pointer-events-none absolute -bottom-6 end-3 font-bold leading-none ${big ? "text-[10rem] text-on-dark/10" : "text-8xl text-primary/10"}`}>0{i + 1}</span>
-                      {big && <div className="absolute -top-20 end-[-5rem] h-64 w-64 rounded-full bg-sky/30 blur-3xl" aria-hidden="true" />}
-                      <span className={`icon-tile relative grid place-items-center rounded-2xl bg-brand text-primary-foreground shadow-glow ${big ? "h-20 w-20" : "h-14 w-14"}`}><Icon className={big ? "h-10 w-10" : "h-7 w-7"} /></span>
-                      <h3 className={`relative mt-6 font-bold ${big ? "text-3xl md:text-4xl" : "text-xl text-navy"}`}>{title}</h3>
-                      <p className={`relative mt-3 ${big ? "text-lg opacity-85" : "text-muted-foreground"}`}>{desc}</p>
-                      <span className="absolute inset-x-0 bottom-0 h-1 origin-[inherit] scale-x-0 bg-brand transition-transform duration-500 group-hover:scale-x-100" />
-                    </div>
-                  </Reveal>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+        <TimelineSection id="why" kicker={t.why.kicker} title={t.why.title}
+          items={t.why.items.map(([title, desc], i) => ({ icon: WHY_ICONS[i]!, title, desc }))} />
 
         {/* CERTIFICATE */}
         <section id="certificate" className="relative overflow-hidden bg-dark-brand py-20 text-on-dark md:py-28">
@@ -347,44 +326,8 @@ function Index() {
         </section>
 
         {/* PROCESS */}
-        <section id="process" className="relative isolate overflow-hidden bg-dark-brand py-20 text-on-dark md:py-28">
-          <div className="absolute -top-24 start-[-6rem] -z-10 h-80 w-80 rounded-full bg-sky/25 blur-3xl" aria-hidden="true" />
-          <div className="absolute -bottom-24 end-[-6rem] -z-10 h-96 w-96 rounded-full bg-primary/40 blur-3xl" aria-hidden="true" />
-          <div className="mx-auto max-w-6xl px-4 md:px-6">
-            <div className="mx-auto mb-14 max-w-2xl text-center">
-              <span className="glass inline-block rounded-full px-4 py-1.5 text-sm font-semibold">{t.process.kicker}</span>
-              <h2 className="mt-4 text-3xl font-bold md:text-4xl">{t.process.title}</h2>
-            </div>
-            <div className="relative">
-              <svg className="absolute inset-x-0 top-10 hidden h-24 w-full md:block" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true">
-                <path className="process-path" d="M60 50 C180 -10 260 110 375 50 S560 -10 625 50 S820 110 940 50" fill="none" stroke="var(--sky)" strokeWidth="3" strokeDasharray="10 10" />
-              </svg>
-              <div className="absolute bottom-6 start-9 top-6 w-0.5 bg-gradient-to-b from-sky to-primary md:hidden" aria-hidden="true" />
-              <ol className="relative grid gap-8 md:grid-cols-4 md:gap-6">
-                {t.process.steps.map((s, i) => {
-                  const Icon = STEP_ICONS[i]!;
-                  return (
-                    <Reveal key={s} delay={i * 180}>
-                      <li className={`group relative flex items-center gap-5 md:flex-col md:text-center ${i % 2 ? "md:mt-16" : ""}`}>
-                        <span className="relative grid h-18 w-18 shrink-0 place-items-center">
-                          <span className="absolute inset-0 rounded-full bg-sky/40 animate-pulse-ring" style={{ animationDelay: `${i * 0.4}s` }} />
-                          <span className="icon-tile relative grid h-18 w-18 place-items-center rounded-full bg-brand text-primary-foreground shadow-glow ring-4 ring-navy">
-                            <Icon className="h-8 w-8" />
-                          </span>
-                        </span>
-                        <div className="glass relative w-full overflow-hidden rounded-2xl px-5 py-5 transition duration-300 group-hover:-translate-y-1.5">
-                          <span className="pointer-events-none absolute -top-4 end-2 text-7xl font-bold text-on-dark/10">0{i + 1}</span>
-                          <div className="text-sm font-bold text-sky">{lang === "ar" ? "الخطوة" : "Step"} 0{i + 1}</div>
-                          <div className="mt-1 text-lg font-bold">{s}</div>
-                        </div>
-                      </li>
-                    </Reveal>
-                  );
-                })}
-              </ol>
-            </div>
-          </div>
-        </section>
+        <TimelineSection id="process" kicker={t.process.kicker} title={t.process.title} label={lang === "ar" ? "الخطوة" : "Step"}
+          items={t.process.steps.map((s, i) => ({ icon: STEP_ICONS[i]!, title: s }))} />
 
         {/* VISION */}
         <section id="vision" className="relative overflow-hidden bg-dark-brand py-20 text-on-dark md:py-28">
@@ -418,32 +361,17 @@ function Index() {
         </section>
 
         {/* CONTACT */}
-        <section id="contact" className="bg-ice py-20 md:py-28">
-          <div className="mx-auto max-w-7xl px-4 md:px-6">
-            <SectionHead kicker={t.contact.kicker} title={t.contact.title} />
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-              {[
-                { icon: Phone, label: t.contact.phone, value: PHONE, href: `tel:${PHONE}` },
-                { icon: MessageCircle, label: t.contact.wa, value: PHONE, href: waLink() },
-                { icon: MapPin, label: t.contact.address, value: lang === "ar" ? "الرياض – حي بدر" : "Riyadh – Badr" },
-                { icon: Hash, label: t.contact.unified, value: UNIFIED },
-                { icon: FileText, label: t.contact.cr, value: CR },
-              ].map(({ icon: Icon, label, value, href }) => {
-                const inner = (
-                  <div className="group flex h-full items-center gap-3 rounded-2xl bg-card p-5 shadow-card transition hover:-translate-y-1">
-                    <span className="icon-tile grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand text-primary-foreground"><Icon className="h-6 w-6" /></span>
-                    <div className="min-w-0">
-                      <div className="text-sm text-muted-foreground">{label}</div>
-                      <div className="truncate font-bold text-navy" dir="ltr">{value}</div>
-                    </div>
-                  </div>
-                );
-                return href ? <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noopener">{inner}</a> : <div key={label}>{inner}</div>;
-              })}
-            </div>
-            <p className="mt-4 text-center text-sm text-muted-foreground">{t.contact.addressText}</p>
-            <div className="mt-10 grid gap-6 md:grid-cols-2">
-              <form onSubmit={onSubmit} className="grid gap-4 rounded-3xl bg-card p-6 shadow-card md:p-8">
+        <TimelineSection id="contact" kicker={t.contact.kicker} title={t.contact.title}
+          items={[
+            { icon: Phone, title: PHONE, desc: t.contact.phone, href: `tel:${PHONE}`, ltr: true },
+            { icon: MessageCircle, title: PHONE, desc: t.contact.wa, href: waLink(), ltr: true },
+            { icon: MapPin, title: lang === "ar" ? "الرياض – حي بدر" : "Riyadh – Badr", desc: t.contact.address },
+            { icon: Hash, title: UNIFIED, desc: t.contact.unified, ltr: true },
+            { icon: FileText, title: CR, desc: t.contact.cr, ltr: true },
+          ]}>
+          <p className="mt-10 text-center text-sm opacity-80">{t.contact.addressText}</p>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+              <form onSubmit={onSubmit} className="grid gap-4 glass rounded-3xl p-6 md:p-8">
                 <input name="name" required placeholder={t.contact.form.name} className={inputCls} aria-label={t.contact.form.name} />
                 <input name="phone" required type="tel" inputMode="tel" placeholder={t.contact.form.phone} className={inputCls} aria-label={t.contact.form.phone} />
                 <select name="service" required defaultValue="" className={inputCls} aria-label={t.contact.form.service}>
@@ -455,10 +383,9 @@ function Index() {
                   <WhatsAppIcon className="h-6 w-6" /> {t.contact.form.submit}
                 </button>
               </form>
-              <LazyMap title={t.contact.address} />
-            </div>
+              <div className="overflow-hidden rounded-3xl ring-1 ring-on-dark/15"><LazyMap title={t.contact.address} /></div>
           </div>
-        </section>
+        </TimelineSection>
       </main>
 
       {/* FOOTER */}
@@ -532,5 +459,66 @@ function SocialIcon({ label, path }: { label: string; path: string }) {
     >
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true"><path d={path} /></svg>
     </a>
+  );
+}
+
+type TimelineItem = { icon: React.ComponentType<{ className?: string }>; title: string; desc?: string; href?: string; ltr?: boolean };
+
+function curvePath(n: number) {
+  const pts = Array.from({ length: n }, (_, i) => [((i + 0.5) / n) * 1000, i % 2 ? 80 : 20] as const);
+  let d = `M${pts[0]![0]} ${pts[0]![1]}`;
+  for (let i = 1; i < n; i++) {
+    const [ax, ay] = pts[i - 1]!;
+    const [bx, by] = pts[i]!;
+    const k = (bx - ax) / 2;
+    d += ` C${ax + k} ${ay} ${bx - k} ${by} ${bx} ${by}`;
+  }
+  return d;
+}
+
+function TimelineSection({ id, kicker, title, items, label, children }: { id: string; kicker: string; title: string; items: TimelineItem[]; label?: string; children?: React.ReactNode }) {
+  const cols = items.length === 5 ? "lg:grid-cols-5" : "lg:grid-cols-4";
+  return (
+    <section id={id} className="relative isolate overflow-hidden bg-dark-brand py-20 text-on-dark md:py-28">
+      <div className="absolute -top-24 start-[-6rem] -z-10 h-80 w-80 rounded-full bg-sky/25 blur-3xl" aria-hidden="true" />
+      <div className="absolute -bottom-24 end-[-6rem] -z-10 h-96 w-96 rounded-full bg-primary/40 blur-3xl" aria-hidden="true" />
+      <div className="mx-auto max-w-7xl px-4 md:px-6">
+        <div className="mx-auto mb-14 max-w-2xl text-center">
+          <span className="glass inline-block rounded-full px-4 py-1.5 text-sm font-semibold">{kicker}</span>
+          <h2 className="mt-4 text-3xl font-bold md:text-4xl">{title}</h2>
+        </div>
+        <div className="relative">
+          <svg className="absolute inset-x-0 top-0 hidden h-[6.5rem] w-full lg:block" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true">
+            <path className="process-path" d={curvePath(items.length)} fill="none" stroke="var(--sky)" strokeWidth="3" strokeDasharray="10 10" />
+          </svg>
+          <div className="absolute bottom-6 start-9 top-6 w-0.5 bg-gradient-to-b from-sky to-primary lg:hidden" aria-hidden="true" />
+          <ol className={`relative grid gap-8 lg:gap-5 ${cols}`}>
+            {items.map(({ icon: Icon, title: it, desc, href, ltr }, i) => {
+              const card = (
+                <div className="glass relative w-full overflow-hidden rounded-2xl px-5 py-5 transition duration-300 group-hover:-translate-y-1.5">
+                  <div className="relative inline-flex items-center rounded-full bg-sky/15 px-3 py-0.5 text-sm font-bold text-sky ring-1 ring-sky/30">{label ? `${label} 0${i + 1}` : `0${i + 1}`}</div>
+                  <div className="relative mt-2 text-lg font-bold" dir={ltr ? "ltr" : undefined}>{it}</div>
+                  {desc && <p className="relative mt-2 text-sm opacity-80">{desc}</p>}
+                </div>
+              );
+              return (
+                <Reveal key={it + i} delay={i * 150}>
+                  <li className={`group relative flex items-center gap-5 lg:flex-col lg:text-center ${i % 2 ? "lg:mt-16" : ""}`}>
+                    <span className="relative grid h-18 w-18 shrink-0 place-items-center">
+                      <span className="absolute inset-0 rounded-full bg-sky/40 animate-pulse-ring" style={{ animationDelay: `${i * 0.4}s` }} />
+                      <span className="icon-tile relative grid h-18 w-18 place-items-center rounded-full bg-brand text-primary-foreground shadow-glow ring-4 ring-navy">
+                        <Icon className="h-8 w-8" />
+                      </span>
+                    </span>
+                    {href ? <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noopener" className="block w-full">{card}</a> : card}
+                  </li>
+                </Reveal>
+              );
+            })}
+          </ol>
+        </div>
+        {children}
+      </div>
+    </section>
   );
 }
