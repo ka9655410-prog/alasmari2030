@@ -108,7 +108,7 @@
   --on-dark: oklch(1 0 0);
   --gradient-brand: linear-gradient(135deg, var(--primary), var(--sky));
   --gradient-dark: linear-gradient(135deg, var(--navy), var(--ocean));
-  --gradient-hero: linear-gradient(180deg, color-mix(in oklab, var(--navy) 78%, transparent), color-mix(in oklab, var(--primary) 45%, transparent));
+  --gradient-hero: linear-gradient(180deg, color-mix(in oklab, var(--navy) 62%, transparent) 0%, color-mix(in oklab, var(--navy) 35%, transparent) 55%, color-mix(in oklab, var(--navy) 70%, transparent));
   --shadow-glow: 0 18px 40px -16px color-mix(in oklab, var(--sky) 60%, transparent);
   --shadow-card: 0 10px 30px -14px color-mix(in oklab, var(--navy) 25%, transparent);
   --chart-1: oklch(0.646 0.222 41.116);
@@ -168,6 +168,8 @@ section[id] { scroll-margin-top: 5rem; }
 @keyframes floaty { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }
 @keyframes pulse-ring { 0% { transform: scale(1); opacity: .6 } 100% { transform: scale(1.7); opacity: 0 } }
 @keyframes fade-up { from { opacity: 0; transform: translateY(20px) } to { opacity: 1; transform: none } }
+@keyframes dash-flow { to { stroke-dashoffset: -200 } }
+.process-path { animation: dash-flow 6s linear infinite; }
 .animate-floaty { animation: floaty 5s ease-in-out infinite; }
 .animate-pulse-ring { animation: pulse-ring 1.8s ease-out infinite; }
 .animate-fade-up { animation: fade-up .8s ease both; }
@@ -177,5 +179,5 @@ section[id] { scroll-margin-top: 5rem; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .animate-floaty, .animate-pulse-ring, .animate-fade-up { animation: none; }
+  .process-path, .animate-floaty, .animate-pulse-ring, .animate-fade-up { animation: none; }
 }
