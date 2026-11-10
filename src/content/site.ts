@@ -34,6 +34,7 @@ export const content = {
       title: "شريكك الموثوق في صيانة ونظافة المنشآت بالرياض",
       body: "مؤسسة علي معيض الأسمري للصيانة والنظافة مؤسسة سعودية تعمل في مدينة الرياض، تقدّم خدمات الصيانة والنظافة المتخصصة للمطاعم والمجمعات التجارية والمنشآت. نلتزم بالجودة في كل تفصيلة، ونضع السلامة والامتثال لاشتراطات البلدية والدفاع المدني في مقدمة أولوياتنا.",
       points: ["الجودة", "السلامة", "الامتثال"],
+      pointDescs: ["تنفيذ دقيق بمعايير عالية", "حماية فريقنا ومنشأتك", "وفق اشتراطات البلدية والدفاع المدني"],
     },
     services: {
       kicker: "خدماتنا",
@@ -123,6 +124,7 @@ export const content = {
       title: "Your trusted partner for facility maintenance & cleaning in Riyadh",
       body: "Ali Mueed Al-Asmari Est. is a Saudi establishment operating in Riyadh, delivering specialized maintenance and cleaning services to restaurants, commercial complexes and facilities. We are committed to quality in every detail, with safety and compliance with municipality and civil defense requirements as our top priority.",
       points: ["Quality", "Safety", "Compliance"],
+      pointDescs: ["Precise work to high standards", "Protecting our team and your facility", "Per municipality & civil defense requirements"],
     },
     services: {
       kicker: "Our Services",
