@@ -246,20 +246,9 @@ function Index() {
               </ul>
             </Reveal>
             <Reveal delay={150}>
-              <div className="relative mx-auto max-w-md pb-10 pe-6">
+              <div className="relative mx-auto max-w-md pb-10">
                 <div className="absolute -inset-4 -z-10 rounded-[3rem] bg-brand opacity-20 blur-2xl" aria-hidden="true" />
                 <img src={heroSm} alt="" loading="lazy" decoding="async" width={720} height={1020} className="aspect-[4/5] w-full rounded-[2.5rem] rounded-tl-[6rem] object-cover shadow-card" />
-                <div className="absolute -start-4 top-10 grid gap-3">
-                  {t.about.points.map((p, i) => {
-                    const Icon = [Award, ShieldCheck, BadgeCheck][i]!;
-                    return (
-                      <div key={p} className="glass-light animate-floaty flex items-center gap-3 rounded-2xl border px-4 py-3 shadow-card" style={{ animationDelay: `${i * 0.8}s` }}>
-                        <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand text-primary-foreground"><Icon className="h-5 w-5" /></span>
-                        <span className="font-bold text-navy">{p}</span>
-                      </div>
-                    );
-                  })}
-                </div>
                 <div className="absolute bottom-0 end-0 flex items-center gap-3 rounded-2xl bg-dark-brand px-5 py-4 text-on-dark shadow-glow">
                   <FileText className="h-6 w-6 text-sky" />
                   <div><div className="text-xs opacity-80">{t.hero.cr}</div><div className="font-bold tracking-wider">{CR}</div></div>
