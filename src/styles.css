@@ -186,3 +186,15 @@ section[id] { scroll-margin-top: 5rem; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .process-path, .animate-floaty, .animate-pulse-ring, .animate-fade-up { animation: none; }
 }
+
+.sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, color-mix(in oklab, var(--sky) 22%, transparent) 50%, transparent 70%);
+  transform: translateX(-100%);
+  animation: sweep 5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes sweep { 60%, 100% { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) { .sweep::after { animation: none; display: none; } }

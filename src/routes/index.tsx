@@ -127,7 +127,7 @@ function Index() {
   };
 
   const inputCls =
-    "w-full rounded-xl border border-input bg-background px-4 py-3 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-ring/30";
+    "h-14 w-full rounded-xl border border-input bg-background px-4 py-3 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-ring/30";
 
   return (
     <div className="min-h-screen overflow-x-clip bg-background font-sans text-foreground">
@@ -225,17 +225,26 @@ function Index() {
               <h2 className="mt-4 text-3xl font-bold leading-snug text-navy md:text-5xl md:leading-tight">{t.about.title}</h2>
               <span className="mt-5 block h-1.5 w-24 rounded-full bg-brand" />
               <p className="mt-6 text-lg leading-loose text-muted-foreground">{t.about.body}</p>
-              <ul className="mt-8 grid gap-3 sm:grid-cols-3">
-                {t.about.points.map((p, i) => {
-                  const Icon = [Award, ShieldCheck, BadgeCheck][i]!;
-                  return (
-                    <li key={p} className="flex items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3.5 shadow-card transition duration-300 hover:-translate-y-1 hover:shadow-glow">
-                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand text-primary-foreground"><Icon className="h-5 w-5" strokeWidth={1.8} /></span>
-                      <span className="font-bold text-navy">{p}</span>
-                    </li>
-                  );
-                })}
-              </ul>
+              <div className="sweep relative mt-8 overflow-hidden rounded-3xl bg-dark-brand p-2 text-on-dark shadow-glow">
+                <div className="absolute -top-16 end-[-3rem] h-40 w-40 rounded-full bg-sky/30 blur-3xl" aria-hidden="true" />
+                <ul className="relative grid divide-y divide-on-dark/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0 rtl:sm:divide-x-reverse">
+                  {t.about.points.map((p, i) => {
+                    const Icon = [Award, ShieldCheck, BadgeCheck][i]!;
+                    return (
+                      <li key={p} className="group flex items-center gap-4 px-4 py-5 transition duration-300 hover:-translate-y-1 sm:flex-col sm:text-center">
+                        <span className="relative grid h-14 w-14 shrink-0 place-items-center">
+                          <span className="absolute inset-0 rounded-full bg-sky/40 animate-pulse-ring" style={{ animationDelay: `${i * 0.5}s` }} />
+                          <span className="icon-tile relative grid h-14 w-14 place-items-center rounded-full bg-brand ring-4 ring-navy"><Icon className="h-7 w-7" strokeWidth={1.8} /></span>
+                        </span>
+                        <span className="min-w-0">
+                          <span className="block text-xl font-bold">{p}</span>
+                          <span className="mt-1 block text-sm opacity-75">{t.about.pointDescs[i]}</span>
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </Reveal>
             <Reveal delay={150}>
               <div className="relative mx-auto max-w-md pb-10">
@@ -361,59 +370,64 @@ function Index() {
               <span className="glass inline-block rounded-full px-4 py-1.5 text-sm font-semibold">{t.contact.kicker}</span>
               <h2 className="mt-4 text-3xl font-bold md:text-5xl">{t.contact.title}</h2>
             </div>
-            <div className="grid gap-6 lg:grid-cols-5">
-              <Reveal className="lg:col-span-2">
-                <div className="glass flex h-full flex-col gap-4 rounded-3xl p-6 md:p-8">
-                  <a href={waLink()} target="_blank" rel="noopener" className="group relative flex items-center gap-4 overflow-hidden rounded-2xl bg-whatsapp p-5 text-on-dark shadow-glow transition hover:-translate-y-1 hover:brightness-110">
+            <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-5">
+              <Reveal className="order-1 lg:col-span-2">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-1">
+                  <a href={waLink()} target="_blank" rel="noopener" className="group flex min-h-16 flex-col items-center justify-center gap-2 rounded-2xl bg-whatsapp p-4 text-center text-on-dark shadow-glow transition active:scale-95 hover:brightness-110 sm:p-5 lg:flex-row lg:justify-start lg:gap-4 lg:text-start">
                     <span className="relative grid h-14 w-14 shrink-0 place-items-center">
                       <span className="absolute inset-0 rounded-full bg-on-dark/30 animate-pulse-ring" />
                       <span className="relative grid h-14 w-14 place-items-center rounded-full bg-on-dark/20"><WhatsAppIcon className="h-8 w-8" /></span>
                     </span>
                     <span className="min-w-0">
-                      <span className="block text-sm opacity-90">{t.contact.wa}</span>
-                      <span className="block text-2xl font-bold" dir="ltr">{PHONE}</span>
+                      <span className="block text-base font-bold lg:text-sm lg:font-normal lg:opacity-90">{t.contact.wa}</span>
+                      <span className="block text-sm font-bold sm:text-lg lg:text-2xl" dir="ltr">{PHONE}</span>
                     </span>
                   </a>
-                  <a href={`tel:${PHONE}`} className="flex items-center gap-4 rounded-2xl bg-brand p-5 shadow-glow transition hover:-translate-y-1">
+                  <a href={`tel:${PHONE}`} className="flex min-h-16 flex-col items-center justify-center gap-2 rounded-2xl bg-brand p-4 text-center text-on-dark shadow-glow transition active:scale-95 sm:p-5 lg:flex-row lg:justify-start lg:gap-4 lg:text-start">
                     <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-on-dark/15"><Phone className="h-7 w-7" /></span>
-                    <span>
-                      <span className="block text-sm opacity-90">{t.contact.phone}</span>
-                      <span className="block text-2xl font-bold" dir="ltr">{PHONE}</span>
+                    <span className="min-w-0">
+                      <span className="block text-base font-bold lg:text-sm lg:font-normal lg:opacity-90">{t.contact.phone}</span>
+                      <span className="block text-sm font-bold sm:text-lg lg:text-2xl" dir="ltr">{PHONE}</span>
                     </span>
                   </a>
-                  <ul className="mt-2 grid gap-3 border-t border-on-dark/10 pt-5">
-                    {[
-                      { icon: MapPin, label: t.contact.address, value: t.contact.addressText },
-                      { icon: Hash, label: t.contact.unified, value: UNIFIED, ltr: true },
-                      { icon: FileText, label: t.contact.cr, value: CR, ltr: true },
-                    ].map(({ icon: Icon, label, value, ltr }) => (
-                      <li key={label} className="flex items-start gap-3">
-                        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-sky/15 text-sky ring-1 ring-sky/30"><Icon className="h-5 w-5" /></span>
-                        <span className="min-w-0">
-                          <span className="block text-sm opacity-70">{label}</span>
-                          <span className="block font-bold" dir={ltr ? "ltr" : undefined}>{value}</span>
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
               </Reveal>
-              <Reveal delay={150} className="lg:col-span-3">
-                <form onSubmit={onSubmit} className="grid gap-4 glass h-full rounded-3xl p-6 md:p-8">
-                <input name="name" required placeholder={t.contact.form.name} className={inputCls} aria-label={t.contact.form.name} />
+              <Reveal delay={150} className="order-2 md:order-3 md:col-span-2 lg:order-2 lg:col-span-3 lg:row-span-2">
+                <form onSubmit={onSubmit} className="glass grid h-full gap-4 rounded-3xl p-4 sm:p-6 md:p-8">
+                <input name="name" required autoComplete="name" placeholder={t.contact.form.name} className={inputCls} aria-label={t.contact.form.name} />
                 <input name="phone" required type="tel" inputMode="tel" placeholder={t.contact.form.phone} className={inputCls} aria-label={t.contact.form.phone} />
                 <select name="service" required defaultValue="" className={inputCls} aria-label={t.contact.form.service}>
                   <option value="" disabled>{t.contact.form.choose}</option>
                   {t.services.items.map(([s]) => <option key={s} value={s}>{s}</option>)}
                 </select>
-                <textarea name="message" rows={4} placeholder={t.contact.form.message} className={inputCls} aria-label={t.contact.form.message} />
-                <button type="submit" className="inline-flex h-14 items-center justify-center gap-2 rounded-2xl bg-whatsapp text-lg font-semibold text-on-dark transition hover:brightness-110">
+                <textarea name="message" rows={4} placeholder={t.contact.form.message} className={`${inputCls} h-auto`} aria-label={t.contact.form.message} />
+                <button type="submit" className="sticky bottom-3 z-10 inline-flex h-16 shadow-glow items-center justify-center gap-2 rounded-2xl bg-whatsapp text-lg font-semibold text-on-dark transition hover:brightness-110">
                   <WhatsAppIcon className="h-6 w-6" /> {t.contact.form.submit}
                 </button>
               </form>
               </Reveal>
+              <Reveal className="order-3 md:order-2 lg:order-3 lg:col-span-2">
+                <ul className="glass grid h-full gap-4 rounded-3xl p-5 sm:p-6">
+                  {[
+                    { icon: MapPin, label: t.contact.address, value: t.contact.addressText },
+                    { icon: Hash, label: t.contact.unified, value: UNIFIED, ltr: true },
+                    { icon: FileText, label: t.contact.cr, value: CR, ltr: true },
+                  ].map(({ icon: Icon, label, value, ltr }) => (
+                    <li key={label} className="flex items-start gap-3">
+                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-sky/15 text-sky ring-1 ring-sky/30"><Icon className="h-5 w-5" /></span>
+                      <span className="min-w-0">
+                        <span className="block text-sm opacity-70">{label}</span>
+                        <span className="block font-bold" dir={ltr ? "ltr" : undefined}>{value}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
             </div>
-            <div className="mt-6 overflow-hidden rounded-3xl ring-1 ring-on-dark/15"><LazyMap title={t.contact.address} /></div>
+            <div className="mt-6 overflow-hidden rounded-3xl ring-1 ring-on-dark/15 [&>div]:h-64 md:[&>div]:h-96 [&>div]:min-h-0"><LazyMap title={t.contact.address} /></div>
+            <a href="https://www.google.com/maps/search/?api=1&query=%D8%AD%D9%8A+%D8%A8%D8%AF%D8%B1+%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6" target="_blank" rel="noopener" className="glass mx-auto mt-4 flex h-14 w-full max-w-sm items-center justify-center gap-2 rounded-2xl font-bold transition active:scale-95 hover:text-sky">
+              <MapPin className="h-5 w-5" /> {lang === "ar" ? "افتح في الخرائط" : "Open in Maps"}
+            </a>
           </div>
         </section>
       </main>
