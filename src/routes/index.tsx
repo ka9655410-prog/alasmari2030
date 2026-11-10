@@ -97,7 +97,7 @@ function SectionHead({ kicker, title, light = false }: { kicker: string; title: 
 }
 
 function VisionLogo({ className = "" }: { className?: string }) {
-  return <img src={vision.url} alt={ar.vision2030Alt} className={`object-contain ${className}`} loading="lazy" decoding="async" />;
+  return <img src={vision.url} alt={ar.vision2030Alt} className={`rounded-xl object-cover ${className}`} loading="lazy" decoding="async" />;
 }
 
 function Index() {
@@ -134,6 +134,7 @@ function Index() {
       {/* NAVBAR */}
       <header className="fixed inset-x-0 top-0 z-50 glass-light">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 md:h-20 md:px-6">
+          {lang === "en" && <VisionLogo className="h-10 w-[76px] shrink-0 shadow-card md:h-14 md:w-[106px]" />}
           <a href="#home" className="flex min-w-0 items-center gap-2">
             <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-dark-brand text-sky">
               <Droplets className="h-5 w-5" />
@@ -168,6 +169,7 @@ function Index() {
             <button onClick={() => setOpen(!open)} className="grid h-10 w-10 place-items-center rounded-xl bg-secondary text-navy xl:hidden" aria-label={t.menu}>
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
+            {lang === "ar" && <VisionLogo className="h-10 w-[76px] shrink-0 shadow-card md:h-14 md:w-[106px]" />}
           </div>
         </nav>
         {open && (
@@ -209,8 +211,8 @@ function Index() {
               </div>
             </div>
             <div className="flex flex-col items-center gap-5 lg:items-end">
-              <div className="animate-floaty rounded-3xl bg-card p-5 shadow-card">
-                <VisionLogo className="h-28 w-48 md:h-36 md:w-60" />
+              <div className="animate-floaty rounded-3xl shadow-glow">
+                <VisionLogo className="h-32 w-64 rounded-3xl md:h-40 md:w-80" />
               </div>
               <div className="glass flex items-center gap-3 rounded-2xl px-5 py-4 text-on-dark">
                 <FileText className="h-6 w-6 text-sky" />
@@ -332,28 +334,42 @@ function Index() {
         </section>
 
         {/* PROCESS */}
-        <section id="process" className="py-20 md:py-28">
+        <section id="process" className="relative isolate overflow-hidden bg-dark-brand py-20 text-on-dark md:py-28">
+          <div className="absolute -top-24 start-[-6rem] -z-10 h-80 w-80 rounded-full bg-sky/25 blur-3xl" aria-hidden="true" />
+          <div className="absolute -bottom-24 end-[-6rem] -z-10 h-96 w-96 rounded-full bg-primary/40 blur-3xl" aria-hidden="true" />
           <div className="mx-auto max-w-6xl px-4 md:px-6">
-            <SectionHead kicker={t.process.kicker} title={t.process.title} />
-            <ol className="relative grid gap-6 md:grid-cols-4">
-              <div className="absolute inset-x-[12%] top-9 hidden h-0.5 bg-brand md:block" aria-hidden="true" />
-              {t.process.steps.map((s, i) => {
-                const Icon = STEP_ICONS[i]!;
-                return (
-                  <Reveal key={s} delay={i * 120}>
-                    <li className="group relative flex items-center gap-4 md:flex-col md:text-center">
-                      <span className="icon-tile relative grid h-18 w-18 shrink-0 place-items-center rounded-full border-4 border-background bg-brand p-4 text-primary-foreground shadow-glow">
-                        <Icon className="h-8 w-8" />
-                      </span>
-                      <div>
-                        <div className="text-sm font-bold text-primary">0{i + 1}</div>
-                        <div className="text-lg font-bold text-navy">{s}</div>
-                      </div>
-                    </li>
-                  </Reveal>
-                );
-              })}
-            </ol>
+            <div className="mx-auto mb-14 max-w-2xl text-center">
+              <span className="glass inline-block rounded-full px-4 py-1.5 text-sm font-semibold">{t.process.kicker}</span>
+              <h2 className="mt-4 text-3xl font-bold md:text-4xl">{t.process.title}</h2>
+            </div>
+            <div className="relative">
+              <svg className="absolute inset-x-0 top-10 hidden h-24 w-full md:block" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true">
+                <path className="process-path" d="M60 50 C180 -10 260 110 375 50 S560 -10 625 50 S820 110 940 50" fill="none" stroke="var(--sky)" strokeWidth="3" strokeDasharray="10 10" />
+              </svg>
+              <div className="absolute bottom-6 start-9 top-6 w-0.5 bg-gradient-to-b from-sky to-primary md:hidden" aria-hidden="true" />
+              <ol className="relative grid gap-8 md:grid-cols-4 md:gap-6">
+                {t.process.steps.map((s, i) => {
+                  const Icon = STEP_ICONS[i]!;
+                  return (
+                    <Reveal key={s} delay={i * 180}>
+                      <li className={`group relative flex items-center gap-5 md:flex-col md:text-center ${i % 2 ? "md:mt-16" : ""}`}>
+                        <span className="relative grid h-18 w-18 shrink-0 place-items-center">
+                          <span className="absolute inset-0 rounded-full bg-sky/40 animate-pulse-ring" style={{ animationDelay: `${i * 0.4}s` }} />
+                          <span className="icon-tile relative grid h-18 w-18 place-items-center rounded-full bg-brand text-primary-foreground shadow-glow ring-4 ring-navy">
+                            <Icon className="h-8 w-8" />
+                          </span>
+                        </span>
+                        <div className="glass relative w-full overflow-hidden rounded-2xl px-5 py-5 transition duration-300 group-hover:-translate-y-1.5">
+                          <span className="pointer-events-none absolute -top-4 end-2 text-7xl font-bold text-on-dark/10">0{i + 1}</span>
+                          <div className="text-sm font-bold text-sky">{lang === "ar" ? "الخطوة" : "Step"} 0{i + 1}</div>
+                          <div className="mt-1 text-lg font-bold">{s}</div>
+                        </div>
+                      </li>
+                    </Reveal>
+                  );
+                })}
+              </ol>
+            </div>
           </div>
         </section>
 
@@ -366,8 +382,8 @@ function Index() {
               <p className="mt-5 text-lg leading-loose text-muted-foreground">{t.vision.body}</p>
             </Reveal>
             <Reveal delay={150} className="order-1 md:order-2">
-              <div className="grid place-items-center rounded-[2rem] bg-card p-10 shadow-card">
-                <VisionLogo className="h-48 w-full max-w-sm md:h-64" />
+              <div className="overflow-hidden rounded-[2rem] shadow-card">
+                <VisionLogo className="aspect-[2/1] h-auto w-full rounded-none" />
               </div>
             </Reveal>
           </div>
@@ -438,7 +454,7 @@ function Index() {
         <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-10 pt-28 md:grid-cols-2 md:px-6 lg:grid-cols-4">
           <div>
             <div className="text-xl font-bold">{t.name}</div>
-            <div className="mt-5 inline-block rounded-2xl bg-card p-4"><VisionLogo className="h-20 w-36" /></div>
+            <div className="mt-5 inline-block"><VisionLogo className="h-20 w-40" /></div>
           </div>
           <div>
             <h3 className="mb-4 font-bold text-sky">{t.footer.links}</h3>
