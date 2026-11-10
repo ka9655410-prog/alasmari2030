@@ -9,7 +9,7 @@ import { content, waLink, PHONE, CR, UNIFIED, type Lang } from "@/content/site";
 import { WhatsAppIcon, Reveal, LazyMap, Wave, DropMotif } from "@/components/site-bits";
 import heroImg from "@/assets/riyadh-hero.jpg";
 import heroSm from "@/assets/riyadh-hero-sm.jpg";
-import vision from "@/assets/vision-2030.jpeg.asset.json";
+import vision from "@/assets/vision-2030-clear.png.asset.json";
 
 const ar = content.ar;
 const TITLE = "خدمات الصيانة والنظافة في الرياض | مؤسسة علي معيض الأسمري";
